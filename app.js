@@ -36,7 +36,7 @@ startBtn.addEventListener("click", () => {
       phraselist.appendChild(li);
 
       if (char !== " ") {
-        li.classList.add(".letter");
+        li.classList.add("letter");
       }
     });
   }
@@ -81,7 +81,7 @@ function checkWin() {
       showClassList[i].classList.remove("show");
     }
 
-    overlay.classList.add = ".win";
+    overlay.classList.add = "win";
     title.textContent = "Yaay!!!! You won!!!";
     overlay.style.display = "flex";
   }
