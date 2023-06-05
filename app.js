@@ -130,10 +130,9 @@ function reset() {
   let newRandomPhrase = getRandomPhraseAsArray(phrases);
   if (localStorage.getItem("newPhrase") !== newRandomPhrase) {
     getRandomPhraseAsArray(phrases);
-    addPhraseToDisplay(newRandomPhrase);
   } else {
-    localStorage.setItem("newRandomPhrase");
     newRandomPhrase = getRandomPhraseAsArray(phrases);
+    localStorage.setItem("newName", newRandomPhrase);
     addPhraseToDisplay(newRandomPhrase);
   }
 }
