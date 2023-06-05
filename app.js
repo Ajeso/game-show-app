@@ -10,6 +10,34 @@ let missed = 0;
 
 const startBtn = document.querySelector(".btn__reset");
 
+const phrases = [
+  "Jason Gilmore",
+  "Guil Hernandez",
+  "Treasure Porth",
+  "Anwar Montasir",
+  "Reggie Williams",
+];
+
+function getRandomPhraseAsArray(arr) {
+  const randomPhrase = arr[Math.floor(Math.random() * arr.length)];
+  localStorage.setItem("newPhrase", randomPhrase);
+  return Array.prototype.slice.call(randomPhrase);
+}
+
+function addPhraseToDisplay(arr) {
+  const phraselist = document.querySelector("#phrase ul");
+
+  arr.forEach((char) => {
+    let li = document.createElement("li");
+    li.textContent = char;
+    phraselist.appendChild(li);
+
+    if (char !== " ") {
+      li.classList.add("letter");
+      li.classList.add("trans");
+    }
+  });
+}
 startBtn.addEventListener("click", () => {
   overlay.style.display = "none";
   if (startBtn.textContent === "Another Round!") {
@@ -18,35 +46,8 @@ startBtn.addEventListener("click", () => {
     reset();
   }
 
-  const phrases = [
-    "Jason Gilmore",
-    "Guil Hernandez",
-    "Treasure Porth",
-    "Anwar Montasir",
-    "Reggie Williams",
-  ];
-
-  function getRandomPhraseAsArray(arr) {
-    const randomPhrase = arr[Math.floor(Math.random() * arr.length)];
-    localStorage.setItem("newPhrase", "randomPhrase");
-    return Array.prototype.slice.call(randomPhrase);
-  }
-
   const phraseArray = getRandomPhraseAsArray(phrases);
 
-  function addPhraseToDisplay(arr) {
-    const phraselist = document.querySelector("#phrase ul");
-
-    arr.forEach((char) => {
-      let li = document.createElement("li");
-      li.textContent = char;
-      phraselist.appendChild(li);
-
-      if (char !== " ") {
-        li.classList.add("letter");
-      }
-    });
-  }
   addPhraseToDisplay(phraseArray);
 });
 
@@ -116,8 +117,6 @@ function reset() {
   overlay.classList.remove("win");
   overlay.classList.remove("lose");
 
-  localStorage.clear();
-
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].disabled = false;
     buttons[i].classList.remove("chosen");
@@ -127,13 +126,13 @@ function reset() {
   }
 
   let newRandomPhrase = getRandomPhraseAsArray(phrases);
-  if (localStorage.getItem("randomPhrase") !== newRandomPhrase) {
+  if (localStorage.getItem(newPhrase) !== newRandomPhrase) {
     getRandomPhraseAsArray(phrases);
     addPhraseToDisplay(newRandomPhrase);
   } else {
     localStorage.removeItem("newPhrase");
     localStorage.setItem("newRandomPhrase");
     newRandomPhrase = getRandomPhraseAsArray(phrases);
-    addPhraseToDisplay(phraseToDisplay);
+    addPhraseToDisplay(newRandomPhrase);
   }
 }
