@@ -112,10 +112,12 @@ function checkWin() {
 function reset() {
   const buttons = document.getElementsByTagName("BUTTON");
   const heartImgs = document.querySelectorAll(".tries img");
-  const phraselist = document.querySelector("#phrase ul");
+  const phraselist = document.querySelector("#phrase ul ");
   missed = 0;
   overlay.classList.remove("win");
   overlay.classList.remove("lose");
+
+  phraselist.innerHTML = " ";
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].disabled = false;
@@ -126,11 +128,10 @@ function reset() {
   }
 
   let newRandomPhrase = getRandomPhraseAsArray(phrases);
-  if (localStorage.getItem(newPhrase) !== newRandomPhrase) {
+  if (localStorage.getItem("newPhrase") !== newRandomPhrase) {
     getRandomPhraseAsArray(phrases);
     addPhraseToDisplay(newRandomPhrase);
   } else {
-    localStorage.removeItem("newPhrase");
     localStorage.setItem("newRandomPhrase");
     newRandomPhrase = getRandomPhraseAsArray(phrases);
     addPhraseToDisplay(newRandomPhrase);
